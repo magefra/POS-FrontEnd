@@ -9,6 +9,6 @@ export interface Category{
 
 
 export interface CategoryApi{
-    date: any,
+    data: any,
     totalRecords: number
 }
