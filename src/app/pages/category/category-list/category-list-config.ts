@@ -24,7 +24,7 @@ const tableColumns : TableColumn<Category>[] =[
   {
     label: 'Estado',
     property: 'stateCategory',
-    type: 'text',
+    type: 'badge',
     cssClasses: ['font-medium', 'w-10'],
   },
   {
@@ -49,12 +49,22 @@ const tableColumns : TableColumn<Category>[] =[
   }
 ];
 
+const inputs = {
+  numFilter: 0,
+  textFilter: "",
+  stateFilter : null,
+  startDate: null,
+  endDate: null
+}
+
+
 export const componentSettings = {
     //icons
     icCategory:  icCategory,
     tableColumns: tableColumns,
     initialSort: "Id",
     initialSortDir: "desc",
+    getInputs: inputs,
     buttonLabel: "EDITAR",
     buttonLabel2: "ELIMINAR",
     columnsFilter: tableColumns.map((column) => { return {label: column.label, property: column.property, type: column.type}})

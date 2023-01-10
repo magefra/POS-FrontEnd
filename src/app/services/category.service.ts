@@ -27,6 +27,7 @@ export class CategoryService {
     getInputs
   ): Observable<CategoryApi>{
 
+    
     const requestUrl = `${environment.api}${endpoint.LIST_CATEGORIES}`
     const params: ListCategoryRequest = new ListCategoryRequest(
       page +	1,
@@ -35,14 +36,14 @@ export class CategoryService {
       size,
       getInputs.numFilter,
       getInputs.textFilter,
-      getInputs.statusFilter,
+      getInputs.stateFilter,
       getInputs.startDate,
       getInputs.endDate
     );
-
-    return this._http.post<CategoryApi>(requestUrl, params).pipe(
+    
+    var response =  this._http.post<CategoryApi>(requestUrl, params).pipe(
       map( (data: CategoryApi ) =>{
-        data.data.forEach(function (e: any){
+        data.data.items.forEach(function (e: any){
           switch(e.state){
             case  0:
               e.badgeColor = 'text-gray bg-gray-light'
@@ -57,5 +58,9 @@ export class CategoryService {
         return data;
       })
     )
+
+
+    response.subscribe(val => console.warn(val));
+    return response;
   }
 }
