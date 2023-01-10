@@ -49,6 +49,26 @@ export class CategoryListComponent implements OnInit {
       return false
   }
 
+  setData(data: any = null){
+    this.component.filters.stateFilter = data.value;
+    this.component.menuOpen = false;
+    this.formatGetInputs();
+  }
+
+  formatGetInputs(){
+    let inputs = {
+      numFilter : 0,
+      textFilter : "",
+      stateFilter: null,
+      starDate: null,
+      endDate: null
+    }
+
+    if(this.component.filters.stateFilter != null){
+      inputs.stateFilter = this.component.filters.stateFilter
+    }
+    this.component.getInputs = inputs;
+  }
 
   CategoryRemove(row: CategoryApi) {
     
