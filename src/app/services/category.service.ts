@@ -59,8 +59,6 @@ export class CategoryService {
       })
     )
 
-
-    response.subscribe(val => console.warn(val));
     return response;
   }
 }

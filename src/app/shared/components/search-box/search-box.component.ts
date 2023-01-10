@@ -60,6 +60,8 @@ export class SearchBoxComponent implements OnInit {
 
     ngOnInit(): void {
 
+
+
         this.style = {
             'shadow-8': !this.cleanStyle,
             'border': this.cleanStyle,
@@ -150,6 +152,9 @@ export class SearchBoxComponent implements OnInit {
         data.searchString = data.searchString.trim()
 
         this.search.emit(data)
+
+
+        console.log('sdfdsf')
     }
 
 }
