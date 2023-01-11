@@ -132,6 +132,7 @@ export const componentSettings = {
     buttonLabel2: "ELIMINAR",
     menuItems: menuItems,
     searchOptions: searchOptions,
+    filters_dates_actives: false,
     filters: filters,
     columnsFilter: tableColumns.map((column) => { return {label: column.label, property: column.property, type: column.type}})
 
