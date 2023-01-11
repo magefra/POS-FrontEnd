@@ -5,6 +5,7 @@ import { ListTableMenu } from '../../../commons/list-table-menu.interface';
 import icViewHeadline from "@iconify/icons-ic/twotone-view-headline"
 import icLabel from "@iconify/icons-ic/twotone-label"
 import { GenericValidators } from '@shared/validators/generic-validators';
+import icCalendarMonth from "@iconify/icons-ic/twotone-calendar-today";
 
 const searchOptions = [
   {
@@ -123,6 +124,7 @@ const inputs = {
 export const componentSettings = {
     //icons
     icCategory:  icCategory,
+    icCalendarMonth : icCalendarMonth,
     menuOpen: false,
     tableColumns: tableColumns,
     initialSort: "Id",
@@ -132,8 +134,9 @@ export const componentSettings = {
     buttonLabel2: "ELIMINAR",
     menuItems: menuItems,
     searchOptions: searchOptions,
-    filters_dates_actives: false,
+    filters_dates_active: false,
     filters: filters,
+    datesFilterArray: ['Fecha de creación'],
     columnsFilter: tableColumns.map((column) => { return {label: column.label, property: column.property, type: column.type}})
 
 

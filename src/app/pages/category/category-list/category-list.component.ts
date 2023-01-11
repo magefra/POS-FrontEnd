@@ -6,6 +6,8 @@ import { CategoryApi } from '../../../responses/category/category.response';
 import { stagger40ms } from 'src/@vex/animations/stagger.animation';
 import { fadeInRight400ms } from '../../../../@vex/animations/fade-in-right.animation';
 import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
+import { DatesFilter } from '../../../shared/functions/actions';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'vex-category-list',
@@ -23,7 +25,8 @@ export class CategoryListComponent implements OnInit {
 
   constructor(
     cumstonTitle: CustomTitleService,
-    public _categoryService: CategoryService
+    public _categoryService: CategoryService,
+    public _dialog: MatDialog
   ) 
   {
     cumstonTitle.set('Categorias');
@@ -61,6 +64,11 @@ export class CategoryListComponent implements OnInit {
     this.formatGetInputs();
   }
 
+
+  datesFilterOpen() {
+    DatesFilter(this);
+  }
+
   formatGetInputs(){
     let inputs = {
       numFilter: 0,
@@ -78,6 +86,11 @@ export class CategoryListComponent implements OnInit {
     if (this.component.filters.stateFilter != null) {
       inputs.stateFilter = this.component.filters.stateFilter;
     } 
+
+    if (this.component.filters.startDate != "" && this.component.filters.endDate != "") {
+      inputs.startDate = this.component.filters.startDate;
+      inputs.endDate = this.component.filters.endDate;
+    }
     
     this.component.getInputs = inputs;
   }
