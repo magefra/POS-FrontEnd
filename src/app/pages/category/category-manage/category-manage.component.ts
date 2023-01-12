@@ -53,15 +53,17 @@ export class CategoryManageComponent implements OnInit {
     }
     else
     {
-      this.cagoryRegister();
+      this.categoryRegister();
     }
   }
-  cagoryRegister():void {
+  categoryRegister():void {
     this._categoryService.CategoryRegister(this.form.value)
     .subscribe((resp)=>{
       if(resp.isSuccess){
         this._alert.success('Excelente', resp.message)
         this._dialogRef.close(true);
+      }else{
+        this._alert.warn('Anteción', resp.message)
       }
     })
   }
