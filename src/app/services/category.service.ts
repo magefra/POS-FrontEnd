@@ -79,6 +79,8 @@ export class CategoryService {
   CategoryById(categoryId: number)
   :Observable<Category>{
     const requestUrl = `${environment.api}${endpoint.CATEGORY_BY_ID}${categoryId}`;
+
+    console.log(requestUrl);
     return this._http.get(requestUrl).pipe(
       map((resp: ApiResponse) =>{
         return resp.data;

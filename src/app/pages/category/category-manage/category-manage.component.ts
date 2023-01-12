@@ -38,7 +38,7 @@ export class CategoryManageComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data != null){
-      this.categoryByEdit(this.data.data.categoryId);
+      this.categoryById(this.data.data.categoryId);
       
     }
   }
@@ -54,7 +54,7 @@ export class CategoryManageComponent implements OnInit {
     const categoryId = this.form.get('categoryId').value;
 
     if(categoryId > 0){
-      this.categoryByEdit(categoryId);
+      this.categoryEdit(categoryId);
     }
     else
     {
@@ -74,7 +74,8 @@ export class CategoryManageComponent implements OnInit {
     })
   }
 
-  categoryByEdit(categoryId: any):void {
+
+  categoryById(categoryId: any){
     console.log(categoryId);
 
     this._categoryService.CategoryById(categoryId)
@@ -85,6 +86,20 @@ export class CategoryManageComponent implements OnInit {
         description: resp.description,
         state : resp.state
       })
+    })
+  }
+
+
+
+  categoryEdit(categoryId: any):void {
+    this._categoryService.CategoryEdit(categoryId, this.form.value)
+    .subscribe((resp)=>{
+      if(resp.isSuccesss){
+        this._alert.success('Excelente', resp.message)
+        this._dialogRef.close(true);
+      }else{
+        this._alert.warn('Anteción', resp.message)
+      }
     })
   }
 

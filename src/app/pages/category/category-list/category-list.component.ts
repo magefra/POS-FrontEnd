@@ -9,6 +9,7 @@ import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
 import { DatesFilter } from '../../../shared/functions/actions';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CategoryManageComponent } from '../category-manage/category-manage.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -132,8 +133,24 @@ export class CategoryListComponent implements OnInit {
   }
 
 
-  CategoryRemove(row: CategoryApi) {
-    
+  CategoryRemove(category: any) {
+    Swal.fire({
+      title: `¿Realmente deseas Eliminar la categoría ${category.name}`,
+      text: 'Se borrará de forma permanente!',
+      icon: 'warning',
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: 'rgb(210, 155,253)',
+      cancelButtonColor: 'rgb(79,109,253)',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      width: 430
+    }).then((result)=>{
+      if(result.isConfirmed){
+        this._categoryService.CategoryRemove(category.categoryId)
+        .subscribe(() => this.formatGetInputs())
+      }
+    })
   }
  
 
