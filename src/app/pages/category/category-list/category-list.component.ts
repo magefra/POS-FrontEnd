@@ -100,7 +100,12 @@ export class CategoryListComponent implements OnInit {
     this._dialog.open(CategoryManageComponent, {
       disableClose: true,
       width: '400px'
-    });
+    }).afterClosed().subscribe((resp)=>{
+      if(resp){
+        this.formatGetInputs();
+      }
+    })
+
   }
 
   CategoryRemove(row: CategoryApi) {

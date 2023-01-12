@@ -40,8 +40,10 @@
                 </mat-error>
             </mat-form-field>
         </div>
-
-
-        
     </mat-dialog-content>
+    
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">CANCELAR</button>
+        <button color="purple" class="bg-accent text-accent-contrast" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+    </mat-dialog-actions>
 </form>
