@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertService } from '@shared/services/alert.service';
 import { Observable } from 'rxjs';
-import { CategoryApi } from '../responses/category/category.response';
+import { Category, CategoryApi } from '../responses/category/category.response';
 import { endpoint } from '@shared/apis/endpoint';
 import { ListCategoryRequest } from '../requests/Category/list-category.request';
 import { map } from 'rxjs/operators';
@@ -76,4 +76,35 @@ export class CategoryService {
     )
   }
 
+  CategoryById(categoryId: number)
+  :Observable<Category>{
+    const requestUrl = `${environment.api}${endpoint.CATEGORY_BY_ID}${categoryId}`;
+    return this._http.get(requestUrl).pipe(
+      map((resp: ApiResponse) =>{
+        return resp.data;
+      })
+    )
+  }
+
+  CategoryEdit(categoryId: number, category: CategoryRequest)
+  :Observable<ApiResponse>{
+    const requestUrl = `${environment.api}${endpoint.CATEGORY_EDIT}${categoryId}`;
+    return this._http.put(requestUrl,category).pipe(
+      map((resp: ApiResponse) =>{
+        return resp;
+      })
+    )
+  }
+
+  CategoryRemove(categoryId: number)
+  :Observable<void>{
+    const requestUrl = `${environment.api}${endpoint.CATEGORY_REMOVE}${categoryId}`;
+    return this._http.put(requestUrl,'').pipe(
+      map((resp: ApiResponse) =>{
+       if(resp.isSuccesss){
+        this._alert.success('Excelente', resp.message)
+       }
+      })
+    )
+  }
 }
