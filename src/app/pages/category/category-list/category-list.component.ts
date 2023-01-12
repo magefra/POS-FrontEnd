@@ -8,6 +8,7 @@ import { fadeInRight400ms } from '../../../../@vex/animations/fade-in-right.anim
 import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
 import { DatesFilter } from '../../../shared/functions/actions';
 import { MatDialog } from '@angular/material/dialog';
+import { CategoryManageComponent } from '../category-manage/category-manage.component';
 
 @Component({
   selector: 'vex-category-list',
@@ -95,11 +96,20 @@ export class CategoryListComponent implements OnInit {
     this.component.getInputs = inputs;
   }
 
+  openDialogRegister(){
+    this._dialog.open(CategoryManageComponent, {
+      disableClose: true,
+      width: '400px'
+    });
+  }
+
   CategoryRemove(row: CategoryApi) {
     
   }
   CategoryEdit(row: any) {
     
   }
+
+
 
 }
