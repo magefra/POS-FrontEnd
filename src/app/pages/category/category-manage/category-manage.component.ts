@@ -21,7 +21,7 @@ export class CategoryManageComponent implements OnInit {
     this.form = this._fb.group({
       categoryId: [0, [Validators.required]],
       name: ["", [Validators.required]],
-      descripcion: [""],
+      description: [""],
       state: ["", [Validators.required]],
     });
   }
@@ -36,7 +36,12 @@ export class CategoryManageComponent implements OnInit {
     this.initForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.data != null){
+      this.categoryByEdit(this.data.data.categoryId);
+      
+    }
+  }
 
 
   CategorySave():void{
@@ -49,7 +54,7 @@ export class CategoryManageComponent implements OnInit {
     const categoryId = this.form.get('categoryId').value;
 
     if(categoryId > 0){
-      this.categoryEdit(categoryId);
+      this.categoryByEdit(categoryId);
     }
     else
     {
@@ -69,8 +74,18 @@ export class CategoryManageComponent implements OnInit {
     })
   }
 
-  categoryEdit(categoryId: any):void {
-    
+  categoryByEdit(categoryId: any):void {
+    console.log(categoryId);
+
+    this._categoryService.CategoryById(categoryId)
+    .subscribe((resp)=>{
+      this.form.reset({
+        categoryId: resp.categoryId,
+        name: resp.name,
+        description: resp.description,
+        state : resp.state
+      })
+    })
   }
 
 }

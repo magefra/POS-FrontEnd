@@ -7,8 +7,9 @@ import { stagger40ms } from 'src/@vex/animations/stagger.animation';
 import { fadeInRight400ms } from '../../../../@vex/animations/fade-in-right.animation';
 import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
 import { DatesFilter } from '../../../shared/functions/actions';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CategoryManageComponent } from '../category-manage/category-manage.component';
+
 
 @Component({
   selector: 'vex-category-list',
@@ -38,20 +39,7 @@ export class CategoryListComponent implements OnInit {
     this.component = componentSettings
   }
 
-  rowClick(e: any){
-    let action = e.action
-    let category = e.row.category
-
-    switch(action){
-      case 'edit':
-        this.CategoryEdit(category)
-        break;
-      case 'remove':
-        this.CategoryRemove(category)
-        break;
-      }
-      return false
-  }
+ 
 
   setData(data: any = null) {
     this.component.filters.stateFilter = data.value;
@@ -108,12 +96,46 @@ export class CategoryListComponent implements OnInit {
 
   }
 
+  rowClick(e: any){
+    let action = e.action
+    let category = e.row
+
+    switch(action){
+      case 'edit':
+        this.CategoryEdit(category)
+        break;
+      case 'remove':
+        this.CategoryRemove(category)
+        break;
+      }
+      return false
+  }
+
+
+  CategoryEdit(row: any) {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.data = row;
+
+    let dialogRef = this._dialog.open(CategoryManageComponent,{
+        data: dialogConfig,
+        disableClose: true,
+        width: '400px'
+    })
+    dialogRef
+    .afterClosed().subscribe((resp)=>{
+      if(resp){
+        this.formatGetInputs();
+      }
+    })
+
+
+  }
+
+
   CategoryRemove(row: CategoryApi) {
     
   }
-  CategoryEdit(row: any) {
-    
-  }
+ 
 
 
 
